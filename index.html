@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>З Ювілеєм, Ірусику! ✨ 35</title>
+    <!-- Tailwind CSS для стилізації -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome для красивих іконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts для казкових шрифтів -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,600;0,800;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Comfortaa', cursive;
+            background: linear-gradient(135deg, #ffe5ec 0%, #ffb3c6 50%, #f0c3fc 100%);
+            overflow-x: hidden;
+        }
+        .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+        .magic-font {
+            font-family: 'Pinyon Script', cursive;
+        }
+        /* Анімація магічного пилу */
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
+            50% { transform: translateY(-100px) rotate(180deg); opacity: 0.4; }
+            100% { transform: translateY(-200px) rotate(360deg); opacity: 0; }
+        }
+        .sparkle {
+            position: absolute;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(244,143,177,0.8) 50%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            animation: float 4s infinite linear;
+        }
+        /* Пульсація рожевого світла */
+        .glow-pink {
+            box-shadow: 0 0 25px rgba(244, 143, 177, 0.7);
+        }
+        /* Стилізація під розмальовку */
+        .color-target {
+            transition: background-color 0.5s ease, filter 0.5s ease;
+        }
+        /* Анімація для котика */
+        @keyframes purr {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03) translateY(-2px); }
+        }
+        .purring-cat {
+            animation: purr 2s infinite ease-in-out;
+        }
+        /* Кастомний скролбар */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #ffe5ec;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ff85a1;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-3 sm:p-6 relative select-none">
+
+    <!-- Фоновий звук (завантажуємо приємну класику/рок атмосферу без авторських прав) -->
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Магічні іскри на фоні -->
+    <div id="sparkle-container" class="absolute inset-0 overflow-hidden pointer-events-none z-0"></div>
+
+    <!-- Основний контейнер, стилізований під Viber-інтерфейс на магічному смартфоні Ірини -->
+    <div class="w-full max-w-md bg-white/95 rounded-[40px] shadow-2xl overflow-hidden border-8 border-pink-200 relative z-10 flex flex-col glow-pink" style="height: 840px; max-height: 95vh;">
+        
+        <!-- Шапка Viber чату -->
+        <div class="bg-gradient-to-r from-[#7360f2] to-[#8f7df2] text-white px-4 py-3 flex items-center justify-between shadow-md">
+            <div class="flex items-center space-x-3">
+                <button class="hover:opacity-80 transition"><i class="fa-solid fa-chevron-left text-lg"></i></button>
+                <div class="relative">
+                    <div class="w-10 h-10 rounded-full border-2 border-white overflow-hidden bg-pink-100">
+                        <!-- Використовуємо оригінальне фото Ірини в кружечку аватара -->
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200" alt="Іринка" class="w-full h-full object-cover">
+                    </div>
+                    <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-400 border-2 border-[#7360f2] rounded-full"></span>
+                </div>
+                <div>
+                    <h2 class="font-bold text-sm leading-tight flex items-center">
+                        Іринка Ювілярка <span class="ml-1">🌸</span>
+                    </h2>
+                    <p class="text-[10px] text-pink-100">онлайн • пише магічний код...</p>
+                </div>
+            </div>
+            <div class="flex space-x-4 text-lg">
+                <button id="phone-btn" class="hover:text-pink-200 transition" onclick="triggerMusic()"><i class="fa-solid fa-phone"></i></button>
+                <button class="hover:text-pink-200 transition"><i class="fa-solid fa-video"></i></button>
+                <button class="hover:text-pink-200 transition"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+            </div>
+        </div>
+
+        <!-- Ігрове / Інтерактивне поле (Тіло чату) -->
+        <div class="flex-1 overflow-y-auto p-4 space-y-4 bg-[#fcedf2] relative" id="chat-body">
+            
+            <!-- Попередження на початку -->
+            <div class="text-center my-2">
+                <span class="bg-white/70 text-[10px] text-gray-500 px-3 py-1 rounded-full border border-pink-100 shadow-sm">
+                    Сьогодні особливий чат • 35 років Магії ✨
+                </span>
+            </div>
+
+            <!-- Повідомлення 1: Відьмацький привітальний лист від Снейпа -->
+            <div class="flex items-start space-x-2">
+                <div class="w-8 h-8 rounded-full bg-slate-900 flex items-center justify-center text-xs text-white border border-slate-700 shadow shadow-black/20 font-bold" title="Severus Snape">
+                    🧪
+                </div>
+                <div class="bg-slate-800 text-slate-100 rounded-2xl rounded-tl-none p-3.5 max-w-[85%] shadow-md border-l-4 border-emerald-500">
+                    <p class="text-xs font-semibold text-emerald-400 mb-1">Severus Snape <span class="text-[9px] text-slate-400 font-normal">18:39</span></p>
+                    <p class="serif-font text-sm leading-relaxed">
+                        "Тридцять п'ять років... Час летить швидше, ніж варяться настійки у моєму кабінеті. Але твій талант до мистецтва та точних наук заслуговує на 100 балів Слизерину. Зі святом, Ірино. Відкрий мій сувій!"
+                    </p>
+                    <!-- Кнопка відкриття сувою -->
+                    <button onclick="openScroll()" class="mt-2.5 w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-1.5 px-3 rounded-xl text-xs flex items-center justify-center gap-2 transition transform hover:scale-105 shadow-md">
+                        <i class="fa-solid fa-scroll"></i> Розгорнути магічний сувій
+                    </button>
+                </div>
+            </div>
+
+            <!-- Динамічний інтерактивний котик, який мурчить -->
+            <div class="flex items-start space-x-2 justify-end" id="cat-msg">
+                <div class="bg-white text-gray-800 rounded-2xl rounded-tr-none p-3 max-w-[80%] shadow-md border-r-4 border-pink-400">
+                    <p class="text-xs font-bold text-pink-500 flex items-center justify-between mb-1">
+                        <span>Твій віртуальний Мурчик</span> 
+                        <span class="text-[9px] text-gray-400 font-normal">щойно</span>
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="text-4xl purring-cat cursor-pointer" onclick="catMeow()">🐱</div>
+                        <div class="text-xs">
+                            <p class="font-semibold text-gray-700">Великий пухнастий котик чекає на обійми!</p>
+                            <p class="text-[10px] text-gray-500 italic">Натисни на нього, щоб він замурчав 🐾</p>
+                        </div>
+                    </div>
+                    <div id="cat-status" class="hidden mt-2 text-center text-[10px] text-pink-600 font-semibold bg-pink-50 rounded-lg p-1 animate-pulse">
+                        * Мррррр... няааав! (Кіт щасливий!) 💖 *
+                    </div>
+                </div>
+                <div class="w-8 h-8 rounded-full bg-pink-100 border border-pink-300 flex items-center justify-center text-sm shadow">🐱</div>
+            </div>
+
+            <!-- Інтерактивна розмальовка-антистрес "Рожевий Відень" -->
+            <div class="flex items-start space-x-2">
+                <div class="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-xs text-white shadow font-bold">🎨</div>
+                <div class="bg-white text-gray-800 rounded-2xl rounded-tl-none p-3.5 max-w-[85%] shadow-md border-l-4 border-purple-400">
+                    <p class="text-xs font-semibold text-purple-600 mb-1">Художня майстерня Іри <span class="text-[9px] text-gray-400 font-normal">18:40</span></p>
+                    <p class="text-xs text-gray-600 mb-2">Натискай на сектори, щоб "розмалювати" Віденську оперу у твої улюблені кольори антистрес!</p>
+                    
+                    <!-- Спрощена сітка-мозаїка Відня -->
+                    <div class="grid grid-cols-5 gap-1 bg-gray-100 p-2 rounded-xl border border-gray-200">
+                        <div onclick="colorSector(this)" class="color-target h-10 bg-white border border-gray-300 rounded cursor-pointer flex items-center justify-center text-[10px]">🎭</div>
+                        <div onclick="colorSector(this)" class="color-target h-10 bg-white border border-gray-300 rounded cursor-pointer flex items-center justify-center text-[10px]">🏛️</div>
+                        <div onclick="colorSector(this)" class="color-target h-10 bg-white border border-gray-300 rounded cursor-pointer flex items-center justify-center text-[10px]">🎶</div>
+                        <div onclick="colorSector(this)" class="color-target h-10 bg-white border border-gray-300 rounded cursor-pointer flex items-center justify-center text-[10px]">🏰</div>
+                        <div onclick="colorSector(this)" class="color-target h-10 bg-white border border-gray-300 rounded cursor-pointer flex items-center justify-center text-[10px]">🐈</div>
+                        
+                        <div onclick="colorSector(this)" class="color-target h-10 bg-white border border-gray-300 rounded cursor-pointer flex items-center justify-center text-[10px]">✨</div>
+                        <div onclick="colorSector(this)" class="color-target h-10 bg-white border border-gray-300 rounded cursor-pointer flex items-center justify-center text-[10px]">🎹</div>
+                        <div onclick="colorSector(this)" class="color-target h-10 bg-white border border-gray-300 rounded cursor-pointer flex items-center justify-center text-[10px]">🎸</div>
+                        <div onclick="colorSector(this)" class="color-target h-10 bg-white border border-gray-300 rounded cursor-pointer flex items-center justify-center text-[10px]">📖</div>
+                        <div onclick="colorSector(this)" class="color-target h-10 bg-white border border-gray-300 rounded cursor-pointer flex items-center justify-center text-[10px]">🍵</div>
+                    </div>
+                    <p class="text-[9px] text-gray-400 mt-1 text-right">Клікни по кожній клітинці!</p>
+                </div>
+            </div>
+
+            <!-- Математичний шифр (Інформатика) -->
+            <div class="flex items-start space-x-2 justify-end">
+                <div class="bg-[#eef2ff] text-gray-800 rounded-2xl rounded-tr-none p-3 max-w-[80%] shadow-md border-r-4 border-indigo-400">
+                    <p class="text-xs font-bold text-indigo-600 mb-1">Сервер Math_and_IT <span class="text-[9px] text-gray-400 font-normal">щойно</span></p>
+                    <p class="text-xs mb-2 font-mono">
+                        if (age === 35) { <br>
+                        &nbsp;&nbsp;console.log("Ювілей!");<br>
+                        &nbsp;&nbsp;return getMagic();<br>
+                        }
+                    </p>
+                    <button onclick="decryptCode()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-1 px-3 rounded-lg text-xs transition transform hover:scale-105">
+                        Розшифрувати код ювілярки 🖥️
+                    </button>
+                    <div id="decrypted-msg" class="hidden mt-2 p-2 bg-emerald-50 text-emerald-800 text-xs rounded border border-emerald-200">
+                        <strong>Знайдено результат:</strong> Матриця любові, 35 років натхнення, нескінченний цикл щастя! ♾️❤️
+                    </div>
+                </div>
+                <div class="w-8 h-8 rounded-full bg-indigo-100 border border-indigo-300 flex items-center justify-center text-xs shadow">💻</div>
+            </div>
+
+        </div>
+
+        <!-- Нижній бар введення повідомлень у Viber -->
+        <div class="p-3 bg-white border-t border-gray-100 flex items-center space-x-2">
+            <button onclick="triggerMagicStick()" class="w-10 h-10 rounded-full bg-pink-100 hover:bg-pink-200 text-pink-600 flex items-center justify-center transition" title="Магічна Паличка">
+                <i class="fa-solid fa-wand-magic-sparkles text-lg animate-pulse"></i>
+            </button>
+            <div class="flex-1 relative bg-gray-50 border border-gray-200 rounded-3xl px-4 py-2 flex items-center">
+                <input type="text" readonly value="Іра, ти неймовірна у свої 35! ✨" class="bg-transparent text-sm text-gray-700 w-full focus:outline-none select-none">
+                <button class="text-gray-400 hover:text-pink-500 transition ml-2"><i class="fa-regular fa-face-smile text-lg"></i></button>
+            </div>
+            <button onclick="triggerMusic()" id="music-bar-btn" class="w-10 h-10 rounded-full bg-purple-500 hover:bg-purple-600 text-white flex items-center justify-center transition shadow-md" title="Врубити Рок/Класику">
+                <i class="fa-solid fa-music"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Модальне вікно: РОЗГОРНУТИЙ СУВІЙ (Текст привітання) -->
+    <div id="scroll-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4 transition-opacity duration-300 opacity-0">
+        <div class="bg-[#fffcf7] border-y-8 border-amber-700 rounded-3xl max-w-md w-full p-6 relative shadow-2xl transform scale-95 transition-transform duration-300 overflow-y-auto" style="max-height: 85vh;">
+            
+            <!-- Стрічка закриття -->
+            <button onclick="closeScroll()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-amber-100 hover:bg-amber-200 text-amber-900 flex items-center justify-center transition shadow">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center">
+                <span class="text-3xl">📜</span>
+                <h3 class="serif-font text-3xl font-bold text-amber-800 my-2">Таємний Сувій Ірині</h3>
+                <p class="magic-font text-4xl text-pink-500 mb-4">Ювілей 35 років</p>
+                
+                <div class="w-24 h-[1px] bg-amber-400 mx-auto my-3"></div>
+
+                <!-- Віршоване привітання -->
+                <div class="text-left text-gray-800 space-y-4 my-4 serif-font text-base sm:text-lg leading-relaxed italic p-3 bg-amber-50/50 rounded-2xl border border-amber-200/50">
+                    <p class="text-center font-bold text-amber-900 text-xl not-italic mb-2">✨ Магія Твого Світу ✨</p>
+                    <p>
+                        Тобі тридцять п’ять — це магічний поріг,<br>
+                        Де Хоґвартс відкрив свій казковий чертог!<br>
+                        Нехай Снейп суворий талан твій вітає,<br>
+                        А паличка чарів рожевим засяє!
+                    </p>
+                    <p>
+                        У кодах прекрасних, в комп'ютерних днях,<br>
+                        Ти пишеш кохання на власних рядках.<br>
+                        Мозаїка мрій твоїх гарно лягає,<br>
+                        А пензель художній весь світ розфарбує!
+                    </p>
+                    <p>
+                        Хай Відень присниться в красивих вогнях,<br>
+                        Де вальси лунають на повних правах.<br>
+                        Всі подорожі, про які ти гадала,<br>
+                        Здійсняться невдовзі, щоб ти мандрувала!
+                    </p>
+                    <p>
+                        Хай рок і сонати сплетуться в тандем,<br>
+                        А котики гріють пухнастим крилом.<br>
+                        Зафарбуй це життя у любов, у тепло,<br>
+                        Щоб щастя твоє завжди поряд цвіло! 🌸
+                    </p>
+                </div>
+
+                <div class="w-24 h-[1px] bg-amber-400 mx-auto my-3"></div>
+
+                <p class="text-xs text-gray-500 italic mt-3">З любов'ю та захопленням у Твій День Народження! 🎉</p>
+                
+                <button onclick="triggerMagicStick(); closeScroll();" class="mt-5 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-bold py-3 px-6 rounded-full text-sm shadow-lg hover:shadow-pink-300 transition transform hover:-translate-y-0.5">
+                    ✨ Надіслати магічний салют! ✨
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Звуки ефектів (безкоштовні симулятори звуків через Web Audio API) -->
+    <script>
+        // Ініціалізація аудіоконтексту для генерації магічних звуків без завантаження великих файлів
+        let audioCtx;
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            return audioCtx;
+        }
+
+        // Синтез звуку магічної палички
+        function playMagicSound() {
+            const ctx = getAudioContext();
+            if (!ctx) return;
+            const now = ctx.currentTime;
+            
+            // Створюємо послідовність дзвінких нот
+            for (let i = 0; i < 5; i++) {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(800 + (i * 300), now + (i * 0.1));
+                gain.gain.setValueAtTime(0.1, now + (i * 0.1));
+                gain.gain.exponentialRampToValueAtTime(0.01, now + (i * 0.1) + 0.3);
+                
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(now + (i * 0.1));
+                osc.stop(now + (i * 0.1) + 0.3);
+            }
+        }
+
+        // Синтез мурчання котика
+        function playPurrSound() {
+            const ctx = getAudioContext();
+            if (!ctx) return;
+            const now = ctx.currentTime;
+            
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            
+            // Низька частота для вібрації мурчання
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(25, now);
+            
+            // Модулятор для ефекту вібрації
+            const mod = ctx.createOscillator();
+            const modGain = ctx.createGain();
+            mod.frequency.setValueAtTime(12, now); // частота мурчання
+            modGain.gain.setValueAtTime(5, now);
+            
+            mod.connect(modGain);
+            modGain.connect(osc.frequency);
+            
+            gain.gain.setValueAtTime(0.3, now);
+            gain.gain.linearRampToValueAtTime(0.3, now + 1.8);
+            gain.gain.linearRampToValueAtTime(0.01, now + 2.0);
+            
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            
+            mod.start(now);
+            osc.start(now);
+            
+            mod.stop(now + 2.0);
+            osc.stop(now + 2.0);
+        }
+
+        // Генерація фонового магічного пилу
+        const sparkleContainer = document.getElementById('sparkle-container');
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            const size = Math.random() * 15 + 5;
+            sparkle.style.width = `${size}px`;
+            sparkle.style.height = `${size}px`;
+            sparkle.style.left = `${Math.random() * 100}%`;
+            sparkle.style.bottom = `-20px`;
+            sparkle.style.animationDuration = `${Math.random() * 3 + 2}s`;
+            
+            sparkleContainer.appendChild(sparkle);
+            setTimeout(() => {
+                sparkle.remove();
+            }, 5000);
+        }
+        setInterval(createSparkle, 400);
+
+        // Музичний супровід
+        let musicPlaying = false;
+        function triggerMusic() {
+            const music = document.getElementById('bg-music');
+            const btn = document.getElementById('music-bar-btn');
+            const phoneBtn = document.getElementById('phone-btn');
+            
+            if (!musicPlaying) {
+                music.play().then(() => {
+                    musicPlaying = true;
+                    btn.classList.add('animate-bounce');
+                    btn.style.backgroundColor = '#ec4899';
+                    phoneBtn.classList.add('text-pink-300');
+                }).catch(err => console.log("Потрібна взаємодія з екраном для увімкнення звуку"));
+            } else {
+                music.pause();
+                musicPlaying = false;
+                btn.classList.remove('animate-bounce');
+                btn.style.backgroundColor = '#a855f7';
+                phoneBtn.classList.remove('text-pink-300');
+            }
+        }
+
+        // Відкриття та закриття сувою
+        function openScroll() {
+            playMagicSound();
+            const modal = document.getElementById('scroll-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.querySelector('div').classList.remove('scale-95');
+            }, 50);
+        }
+
+        function closeScroll() {
+            const modal = document.getElementById('scroll-modal');
+            modal.classList.add('opacity-0');
+            modal.querySelector('div').classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        }
+
+        // Кліки по сектору розмальовки
+        const colors = ['#f48fb1', '#ce93d8', '#ff85a1', '#f06292', '#ba68c8', '#ffb3c6', '#ffd54f'];
+        function colorSector(element) {
+            playMagicSound();
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            element.style.backgroundColor = randomColor;
+            element.style.color = 'white';
+            element.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                element.style.transform = 'scale(1)';
+            }, 150);
+            
+            // Додаємо маленькі іскри навколо клітинки
+            for (let i = 0; i < 5; i++) {
+                const miniSparkle = document.createElement('div');
+                miniSparkle.style.position = 'absolute';
+                miniSparkle.style.width = '6px';
+                miniSparkle.style.height = '6px';
+                miniSparkle.style.borderRadius = '50%';
+                miniSparkle.style.background = randomColor;
+                const rect = element.getBoundingClientRect();
+                miniSparkle.style.left = `${rect.left + rect.width/2 + (Math.random() * 40 - 20)}px`;
+                miniSparkle.style.top = `${rect.top + rect.height/2 + (Math.random() * 40 - 20)}px`;
+                miniSparkle.style.pointerEvents = 'none';
+                miniSparkle.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
+                document.body.appendChild(miniSparkle);
+                
+                setTimeout(() => {
+                    miniSparkle.style.transform = 'translateY(-20px) scale(0)';
+                    miniSparkle.style.opacity = '0';
+                }, 50);
+                setTimeout(() => miniSparkle.remove(), 600);
+            }
+        }
+
+        // Мурчання кота
+        function catMeow() {
+            playPurrSound();
+            const status = document.getElementById('cat-status');
+            status.classList.remove('hidden');
+            status.classList.add('block');
+            setTimeout(() => {
+                status.classList.remove('block');
+                status.classList.add('hidden');
+            }, 4000);
+        }
+
+        // Розшифрування коду
+        function decryptCode() {
+            playMagicSound();
+            const msg = document.getElementById('decrypted-msg');
+            msg.classList.remove('hidden');
+            msg.classList.add('block');
+        }
+
+        // Ефект магічної палички
+        function triggerMagicStick() {
+            playMagicSound();
+            // Ефектний спалах екрана на секунду
+            const flash = document.createElement('div');
+            flash.style.position = 'fixed';
+            flash.style.inset = '0';
+            flash.style.backgroundColor = 'rgba(255,182,193,0.4)';
+            flash.style.zIndex = '100';
+            flash.style.pointerEvents = 'none';
+            flash.style.transition = 'opacity 0.8s ease';
+            document.body.appendChild(flash);
+            
+            setTimeout(() => {
+                flash.style.opacity = '0';
+            }, 100);
+            setTimeout(() => flash.remove(), 1000);
+
+            // Створюємо фонтан іскор знизу догори
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const sp = document.createElement('div');
+                    sp.style.position = 'fixed';
+                    sp.style.width = '10px';
+                    sp.style.height = '10px';
+                    sp.style.borderRadius = '50%';
+                    sp.style.background = `radial-gradient(circle, #fff 0%, ${colors[Math.floor(Math.random() * colors.length)]} 70%)`;
+                    sp.style.left = `${Math.random() * 100}vw`;
+                    sp.style.bottom = '0px';
+                    sp.style.zIndex = '99';
+                    sp.style.pointerEvents = 'none';
+                    sp.style.transition = 'transform 1.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.5s ease';
+                    document.body.appendChild(sp);
+                    
+                    setTimeout(() => {
+                        sp.style.transform = `translate(${Math.random() * 200 - 100}px, -${Math.random() * 80 + 50}vh) scale(0.5)`;
+                        sp.style.opacity = '0';
+                    }, 50);
+                    
+                    setTimeout(() => sp.remove(), 2000);
+                }, i * 50);
+            }
+        }
+    </script>
+</body>
+</html>
